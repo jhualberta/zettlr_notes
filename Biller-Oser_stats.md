@@ -28,7 +28,7 @@ intervals 与 bounds不同，论文建议使用highest probability density， �
 
 构造upper bound 即积分上限$S_{up}$，to be determined
 对Poisson counting实验，average signal strength S，expected bkg level = B，总共观测到n个事例：
-P(S)：对S的先验概率， CI：desired credibility for the interval  
+P(S)：对S的先验概率， **$CI$：desired credibility for the interval  **
 $\frac{\int_0^{S_{up}}[(S+B)^n e^{-(S+B)}/n!]P(S)dS}{\int_0^\infty[(S+B)^n e^{-(S+B)}/n!]P(S)dS} = CI$
 
 S所有的正值是在给定所有等价consideration下的priori, 即 一个**uniform priori**, 在其中，对$S\geq 0$, P(S)是一个常数。
@@ -38,7 +38,7 @@ $S_{up}$ 解释为 模型参数值范围的上限， 观测到n或小于n事例�
 
 #### 标准频率论
 不存在模型参数在推导的bounds中的概率，不管模型参数是不是确实就在bounds中。
-Neyman construction 频率论intervals，不用posterior概率，对给定的观测、在固定的假设下的PDF开始构造似然。对每一个可能的假设，定义一部分 含有可能的输出outcomes 的频率论的置信水平 confidence level CL
+Neyman construction 频率论intervals，不用posterior概率，对给定的观测、在固定的假设下的PDF开始构造似然likelihood。对每一个可能的假设，定义一部分 含有可能的输出outcomes 的频率论的置信水平 confidence level CL
 
 对给定的一个测量，模型参数值 是“有可能地”(likely)， 即 可能会被包含在CL fraction，然后定义confidence region
 与贝叶斯区别：不是任何给定model是likely， 构造 回避了任何直接的模型比较。在这一构造下，依然有ambiguity: 如何使用PDF去 组合  初始的频率间隔 与common ordering choices: 中心，highest概率密度，most compact intervals.
@@ -51,6 +51,7 @@ $1-CI = {\sum_{m=0}^n (S_{up}+B)^m e^{-(S_{up}+B)}/m!}$     （2）
 此时$S_{up}$的解释：测量重复充分大的次数后，以相对频率观测到 小于等于n个事例的模型参数值范围的上限
 （1）式uniform prior下的贝叶斯方程，与（2）不同在于分母差了一个bkg归一化。对这一构造，可能的背景事例数**不再限制为**小于或等于在这个特定的测量中所观测到的总的事例数。原因是，这里计算的概率，是一组测量（ensemble）中的一个一般generic的试验trial中观测到的n个事例。这里不考虑从任何**特定的**（或者**具体的**）的观测中得到（推断出来的）额外的信息，比如实际探测到的背景事例数不可能超过n。因此，与任何 **特定的**测量相联系的概率，在频率论方法下并不是一个有意义的概念。
 
+因为缺少bkg归一化，（2）产生的$S_{up}$值可以是负的。因此有一些例子中，观测到的事件数被视为 比desired confidence level的可能性更小。
 
 
 
@@ -72,4 +73,9 @@ Bayesian upper bounds
 对给定的假设H与数据集D，后验概率与prior的联系为：
 
 prior概率P(H)的impact随事件数增大而不显著。
+
+
+#### 实际例子
+期待的背景事例数B，对1 kg 探测器一年的运行，B=9
+如何构造一个90%的CL（频率论）或CI（贝叶斯）
  
