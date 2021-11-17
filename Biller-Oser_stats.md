@@ -1,6 +1,6 @@
 arxiv 1405.50102v2
-#stats #physics
-
+#stats #physics  #统计 #教学
+ 
 treatment of nuisance parameters
 constructions
 low event number
@@ -78,4 +78,5 @@ prior概率P(H)的impact随事件数增大而不显著。
 #### 实际例子
 期待的背景事例数B，对1 kg 探测器一年的运行，B=9
 如何构造一个90%的CL（频率论）或CI（贝叶斯）
+ 
  
