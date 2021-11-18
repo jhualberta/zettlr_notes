@@ -61,21 +61,45 @@ quote central value with 其不确定度，若测量的信号超出三倍其不�
 significance level $3\sigma$
 
 flip-flopping 问题的例子：
-随机变量x 遵从高斯分布，有一个已知、固定的标准差$\sigma=1$ ，未知的平均值$\mu\geq 0$ 作为singal yield或者cross section
+随机变量x 遵从高斯分布，有一个已知、固定的标准差$\sigma=1$ ，未知的平均值$\mu\geq 0$ 作为singal yield或者cross section。   Quoted central value 在给定的constraint下，必须大于等于0。对于$\mu$的测量值，如果significance ($x/\sigma$) 小于$3\sigma$,  quote 0, 否则quote 所测值x, 即有：
+![267141051185dc7eb7b11bb97c740c06.png](267141051185dc7eb7b11bb97c740c06.png)
 
-quoted central value必须总是$\geq 0$, given the assumed constraint.    
-
-测量到的x
-
-从central interval到完全非对称区间（upper limit）
+对置信区间，给定测值x，若$x/\sigma \geq 3$, quote一个central value，带有对称误差 $\pm \sigma$ at 68.27\% CL
+或者带有 $\pm 1.645\sigma$ 的误差at 90% CL。 另一方面, 若$x/\sigma<3$， quote upper limit $x^{up}$, 即置信区间$[0,x^{up}]$
+$\mu$的upper limit 对应$\mu<x^{up}=x+1.282$ at 90% CL, 即Gaussian PDF下的面积。
+综上， quoted置信区间at 90% CL为：
+![b820f38170d679b3410a4eed3ff8b5d2.png](b820f38170d679b3410a4eed3ff8b5d2.png)
 
 ![ff1378b2a2da62d7cbc73e17accbebe8.png](ff1378b2a2da62d7cbc73e17accbebe8.png)
 
+此时$\sigma =1$, 虚线为quoted central value of $\mu$ 作为测值x的函数。
 
+
+基于测值x，从central interval到完全非对称区间（upper limit）产生了一个不正确的coverage, 依赖于$\mu$的值，此时$[x_1,x_2]$ 从90% 变成85%， 如红色横线的地方，比desired CL要小。
+
+#### Feldman-cousins方法
+在低观测信号yield的情况下，构造Neyman置信带，从central/ quasi-central 区间到upper limit 平滑变化，
+
+基于似然比的ordering rule, 对未知参数$\theta$ 给定一个值$\theta_0$, 所选的变量x的区间，用来构造Neyman带，由两个x的PDF的比值来定义，其中一个在假设 $\theta=\theta_0$下，另一个在给定测值x，最大似然的最佳估计$\theta_{best}(x)$
+![eef038556060039bf331ffb82231d88d.png](eef038556060039bf331ffb82231d88d.png)
+
+似然比必须大于常数$k_\alpha$, 它由置信水平$1-\alpha$决定。此时置信区间对一个给定的值$\theta=\theta_0$, 
+$R_\alpha(\theta_0)=\{x| \lambda(x|\theta_0)>k_\alpha\}$ , 而$\int_{R_\alpha} f(x|\theta_0)dx = 1-\alpha$
 
 
 ![1a61f11bc694b6baa80b81c60f7c379e.png](1a61f11bc694b6baa80b81c60f7c379e.png)
-$\int_{R_\alpha}f(x|\theta_0) dx = 1-\alpha$
+对上述例子，遵从高斯分布，$\mu=\mu_{best}(x)$ 是最大似然估计值，给定x且constraint: $\mu\geq 0$, 则$\mu_{best}(x)=max(x,0)$。 使用$\mu$的最大似然估计，对x的PDF为
+![8675fab5b42e94078901a9007b4baea2.png](8675fab5b42e94078901a9007b4baea2.png)
 
+![8d85b1364b00fbc479577c2ea473ebe0.png](8d85b1364b00fbc479577c2ea473ebe0.png)
+
+求出似然比， 则对给定的$\mu=\mu_0$, 区间$[x_1(\mu_0), x_2(\mu_0)]$  可以通过对不等式$\lambda(x|\mu)>k_\alpha$ ， 以及指定的desired CL,  $1-\alpha$进行数值求解
+
+计算结果为下图。与之前的图片比较，x越来越大时，区间越来越不对称，在某个点上变成完全不对称(即$[0,\mu^{up}]$) 定出upper limit $\mu^{up}$。 对负的x， 避免了非物理的负的$\mu$ 。这一方法从central interval到upper limit光滑过渡，保证了正确的90%的coverage
+![9c3aeb3eb0bdc19fae30eb47d3c63dda.png](9c3aeb3eb0bdc19fae30eb47d3c63dda.png)
 
 #### 8.10 $CL_s$ method
+从频率论角度来说是保守的。
+
+在贝叶斯方法下，nuisance参数的处理是well defined. (Sect 3.4)
+Poisson分布的后验分布  P(s|n)  在给定观测到的值n下，
